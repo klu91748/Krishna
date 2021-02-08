@@ -35,5 +35,12 @@ public class UserService {
 	public User findUser(String name) {
 		return userDao.findById(name).get();
 	}
+	
+	public boolean seedDB() {
+		userDao.save(new User("user", passwordEncoder.encode("pass"), "USER"));
+		userDao.save(new User("admin", passwordEncoder.encode("pass"), "ADMIN"));
+		
+		return true;
+	}
 
 }
