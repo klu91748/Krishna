@@ -3,6 +3,7 @@ package com.example.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -42,15 +43,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	/*
+    	
     	http
     	.csrf().disable()
     	.authorizeRequests()
     	.antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-    		.anyRequest().authenticated()
+    		.anyRequest().permitAll()
     		.and()
     		.httpBasic();
-    	*/
+    	
+    	/*
     	http
     		.authorizeRequests().antMatchers("/authenticate").permitAll()
     		.antMatchers("/admin/**").hasRole("ADMIN")
@@ -68,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
     		.csrf().disable();
-    	
+    	*/
     	http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
